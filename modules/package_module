@@ -5,7 +5,7 @@ If you want to install a generic package like `git` on any Debian, RHEL, Fedora,
 command:
 
 - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-$ ansible app -b -m package -a "name=git state=present"
+> $ ansible app -b -m package -a "name=git state=present"
 - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 "package" works much the same as yum, apt, and other package management modules.
