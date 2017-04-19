@@ -1,1 +1,10 @@
-# This is the inventory file
+# This is the inventory file, usually placed in /etc/ansible/hosts
+
+[dbservers]
+192.168.56.114
+
+
+[webservers]
+192.168.56.105
+192.168.56.106
+
