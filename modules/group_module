@@ -1,0 +1,19 @@
+
+# - - - - - - - - - - - - - - - - - - - - - - - - - 
+# Module for user and group management.
+# http://docs.ansible.com/ansible/user_module.html
+# - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+
+# To create a group  
+$ ansible webserver -b -m group -a "name=admin state=present"
+
+# To delete a group
+$ ansible webserver -b -m group -a "name=admin state=absent"
+
+# Create a user, his home, and add him to a group
+$ ansible webserver -b -m user -a "name=bender group=admin createhome=yes"
+
+# Delete an account
+$ ansible webserver -b -m user -a "name=bender state=absent remove=yes"
+
