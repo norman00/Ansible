@@ -1,13 +1,14 @@
-Ansible has a variety of package management modules for any flavor of Linux, but there’s also a generic package module that can be used
-for easier cross-platform Ansible usage.
+# - - - - - - - - - - - - - - - - - - - - - - - - - 
+# Package module
+# http://docs.ansible.com/ansible/package_module.html
+#
+# Ansible has a variety of package management modules for any flavor of Linux, but there’s also a generic package module that can be used
+# for easier cross-platform Ansible usage.
+# Package works much the same as yum, apt, and other package management modules.
+# - - - - - - - - - - - - - - - - - - - - - - - - - 
 
-If you want to install a generic package like `git` on any Debian, RHEL, Fedora, Ubuntu, CentOS, FreeBSD, etc. system, you can use the 
-command:
+# To install git on any Debian, RHEL, Fedora, Ubuntu, CentOS, FreeBSD, etc. system
+$ ansible webserver -b -m package -a "name=git state=present"
 
-- - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-$ ansible app -b -m package -a "name=git state=present"
-
-- - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-"package" works much the same as yum, apt, and other package management modules.
+# To deinstall it 
+$ ansible webserver -b -m package -a "name=git state=absent"
