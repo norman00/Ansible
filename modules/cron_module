@@ -1,1 +1,27 @@
-Explaining cron module here.
+# - - - - - - - - - - - - - - - - - - - - - - - - - 
+# Cron module
+# http://docs.ansible.com/ansible/cron_module.html
+#
+# You can easily schedule periodic reboots, tasks or scripts using the cron module
+# - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+# To add a cron job at 12 p.m. everyday
+
+$ ansible webserver -b -m cron -a "name='daily-cron-all-servers' hour=12 job='/tmp/dummy.sh'"
+192.168.56.105 | SUCCESS => {
+    "changed": true,
+    "envs": [],
+    "jobs": [
+        "daily-cron-all-servers"
+    ]
+}
+
+
+# To remove a cron job
+
+$ ansible webserver -b -m cron -a "name='daily-cron-all-servers' state=absent"
+192.168.56.105 | SUCCESS => {
+    "changed": true,
+    "envs": [],
+    "jobs": []
+}
