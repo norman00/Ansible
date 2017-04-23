@@ -1,9 +1,10 @@
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - 
-# Module for user and group management.
+# Group module
 # http://docs.ansible.com/ansible/user_module.html
+#
+# You can do just about anything you could do with useradd, userdel, and usermod using Ansible’s user module
 # - - - - - - - - - - - - - - - - - - - - - - - - - 
-
 
 # To create a group  
 $ ansible webserver -b -m group -a "name=admin state=present"
