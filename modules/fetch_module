@@ -1,0 +1,18 @@
+# - - - - - - - - - - - - - - - - - - - - - - - - - 
+# Fetch module
+# http://docs.ansible.com/ansible/fetch_module.html
+#
+# Fetch works in a very similar way as the copy module
+# but in reverse, the files will be copied from remote
+# machines into local directory.
+# - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+# Grab the sshd_config file from all our servers in the inventory and paste it into /tmp, by default puts the file from each folder 
+# into a folder in the destination with the name of the host, in this case the IP addresses.
+
+$ ansible all -b -m fetch -a "src=/etc/ssh/sshd_config dest=/tmp"
+
+
+# e.g.
+# /tmp/192.168.56.114/etc/ssh/sshd_config 
+# /tmp/192.168.56.105/etc/ssh/sshd_config 
