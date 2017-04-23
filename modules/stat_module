@@ -1,20 +1,15 @@
-Stat module:
+# - - - - - - - - - - - - - - - - - - - - - - - - - 
+# Stat module
+# http://docs.ansible.com/ansible/stat_module.html
+#
+# If you need to check a file’s permissions, MD5, or owner, use Ansible’s stat module.
+# This gives the same information you’d get when running the stat command, but passes back information in JSON, which can be parsed 
+# a little more easily.
+# - - - - - - - - - - - - - - - - - - - - - - - - - 
 
-If you need to check a file’s permissions, MD5, or owner, use Ansible’s stat module:
 
-This gives the same information you’d get when running the stat command, but passes back information in JSON, which can be parsed 
-a little more easily.
-
-- - - - - - - - - - - - - - - - - - - - - - - - - -
-
+# EDIT ME COMMENT HERE
 $ ansible all -m stat -a "path=/etc/environment"
-
-- - - - - - - - - - - - - - - - - - - - - - - - - -
-
-Output:
-
-
-[erascong@ansible-master ~]$ ansible all -m stat -a "path=/etc/environment"
 192.168.56.114 | SUCCESS => {
     "changed": false,
     "stat": {
@@ -99,45 +94,4 @@ Output:
         "xusr": false
     }
 }
-192.168.56.106 | SUCCESS => {
-    "changed": false,
-    "stat": {
-        "atime": 1492025605.507,
-        "checksum": "da39a3ee5e6b4b0d3255bfef95601890afd80709",
-        "ctime": 1483650524.276,
-        "dev": 64768,
-        "executable": false,
-        "exists": true,
-        "gid": 0,
-        "gr_name": "root",
-        "inode": 4194424,
-        "isblk": false,
-        "ischr": false,
-        "isdir": false,
-        "isfifo": false,
-        "isgid": false,
-        "islnk": false,
-        "isreg": true,
-        "issock": false,
-        "isuid": false,
-        "md5": "d41d8cd98f00b204e9800998ecf8427e",
-        "mode": "0644",
-        "mtime": 1478366375.0,
-        "nlink": 1,
-        "path": "/etc/environment",
-        "pw_name": "root",
-        "readable": true,
-        "rgrp": true,
-        "roth": true,
-        "rusr": true,
-        "size": 0,
-        "uid": 0,
-        "wgrp": false,
-        "woth": false,
-        "writeable": false,
-        "wusr": true,
-        "xgrp": false,
-        "xoth": false,
-        "xusr": false
-    }
-}
+
