@@ -1,1 +1,52 @@
-file_module explanation here.
+# - - - - - - - - - - - - - - - - - - - - - - - - - 
+# File module
+# http://docs.ansible.com/ansible/file_module.html
+#
+# Create files and directories, manage permissions and ownership on
+# files and directories, modify SELinux properties, and create symlinks.
+# - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+
+# Create a directory
+
+$  ansible webserver -m file -a "dest=/tmp/www mode=644 state=directory"
+192.168.56.105 | SUCCESS => {
+    "changed": true,
+    "gid": 1000,
+    "group": "erascong",
+    "mode": "0644",
+    "owner": "erascong",
+    "path": "/tmp/www",
+    "secontext": "unconfined_u:object_r:user_tmp_t:s0",
+    "size": 6,
+    "state": "directory",
+    "uid": 1000
+}
+
+
+# Delete a directory
+
+$  ansible webserver -m file -a "dest=/tmp/www mode=644 state=absent"
+192.168.56.105 | SUCCESS => {
+    "changed": true,
+    "path": "/tmp/www",
+    "state": "absent"
+}
+
+
+# Create a symlink
+
+$ ansible webserver -m file -a "src=/home/erascong/src_file dest=/home/erascong/dest_file state=link force=true"   
+192.168.56.105 | SUCCESS => {
+    "changed": false,
+    "dest": "/home/erascong/dest_file",
+    "gid": 1000,
+    "group": "erascong",
+    "mode": "0777",
+    "owner": "erascong",
+    "secontext": "unconfined_u:object_r:user_home_t:s0",
+    "size": 23,
+    "src": "/home/erascong/src_file",
+    "state": "link",
+    "uid": 1000
+}
