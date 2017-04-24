@@ -1,5 +1,7 @@
 # Ansible
+<p align="center">
 ![alt tag](https://upload.wikimedia.org/wikipedia/commons/0/05/Ansible_Logo.png)
+</p>
 
 Documentation
 
