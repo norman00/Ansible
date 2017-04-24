@@ -1,1 +1,33 @@
-Links to official documentation here.
+# - - - - - - - - - - - - - - - - - - - - - - - - - 
+#
+# List of Ansible useful links 
+#
+# - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+# Ad-Hoc commands
+http://docs.ansible.com/ansible/intro_adhoc.html
+
+# Ansible galaxy
+https://galaxy.ansible.com/
+
+# Ansible modules
+http://docs.ansible.com/ansible/modules.html
+
+# Ansible playbooks
+http://docs.ansible.com/ansible/playbooks.html
+
+# Ansible Tower
+https://www.ansible.com/tower
+
+# Ansible quick start overview video
+https://www.ansible.com/quick-start-video
+
+# Best practices
+http://docs.ansible.com/ansible/playbooks_best_practices.html
+
+# Frequent Asked Questions
+http://docs.ansible.com/ansible/faq.html
+
+# YAML syntax
+http://docs.ansible.com/ansible/YAMLSyntax.html
+http://www.yaml.org
