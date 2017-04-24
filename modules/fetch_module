@@ -11,8 +11,19 @@
 # into a folder in the destination with the name of the host, in this case the IP addresses.
 
 $ ansible all -b -m fetch -a "src=/etc/ssh/sshd_config dest=/tmp"
-
-
-# e.g.
-# /tmp/192.168.56.114/etc/ssh/sshd_config 
-# /tmp/192.168.56.105/etc/ssh/sshd_config 
+192.168.56.114 | SUCCESS => {
+    "changed": true,
+    "checksum": "960f7e70a14db62611aa78e4206f381587a9728a",
+    "dest": "/tmp/192.168.56.114/etc/ssh/sshd_config",
+    "md5sum": "0440a9608de01c4fa1c1dd6301b568ec",
+    "remote_checksum": "960f7e70a14db62611aa78e4206f381587a9728a",
+    "remote_md5sum": null
+}
+192.168.56.105 | SUCCESS => {
+    "changed": true,
+    "checksum": "5a5a5256c710afb08fac363f9e2808211c402db5",
+    "dest": "/tmp/192.168.56.105/etc/ssh/sshd_config",
+    "md5sum": "376aa5ff12753012c4dd52caf6787c57",
+    "remote_checksum": "5a5a5256c710afb08fac363f9e2808211c402db5",
+    "remote_md5sum": null
+}
