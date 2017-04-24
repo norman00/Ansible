@@ -2,5 +2,37 @@
 # Lineinfile module
 # http://docs.ansible.com/ansible/lineinfile_module.html
 #
-# 
+# This module will search a file for a line, and ensure that it is present or absent.
+# See the replace module if you want to change multiple, similar lines or check blockinfile 
+# if you want to insert/update/remove a block of lines in a file. For other cases, see the 
+# copy or template modules.
 # - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+[ selinux.yml ]
+
+---
+# Change SELinux policy to permissive
+- hosts: all
+  become: yes
+  tasks:
+  - lineinfile:
+      dest: '/etc/selinux/config'
+      regexp: '^SELINUX='
+      line: 'SELINUX=permissive'
+      
+      
+$ ansible-playbook selinux.yml
+
+PLAY [all] *********************************************************************
+
+TASK [setup] *******************************************************************
+ok: [192.168.56.105]
+ok: [192.168.56.114]
+
+TASK [lineinfile] **************************************************************
+changed: [192.168.56.105]
+changed: [192.168.56.114]
+
+PLAY RECAP *********************************************************************
+192.168.56.105             : ok=2    changed=1    unreachable=0    failed=0
+192.168.56.114             : ok=2    changed=1    unreachable=0    failed=0
