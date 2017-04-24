@@ -1,1 +1,19 @@
-yum_module explanation here.
+# - - - - - - - - - - - - - - - - - - - - - - - - - 
+# Yum module
+# http://docs.ansible.com/ansible/yum_module.html
+#
+# Install or remove any package via yum on centos, 
+# fedora, rhel systems
+# - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+# Install apache
+$ ansible webserver -b -m yum -a "name=httpd state=present"
+
+# Remove apache package
+$ ansible webserver -b -m yum -a "name=httpd state=absent"
+
+# Install nginx from a remote repository
+$ ansible webserver -b -m yum -a "name: http://nginx.org/packages/centos/6/noarch/RPMS/nginx-release-centos-6-0.el6.ngx.noarch.rpm state: present"
+
+# Upgrade all packages
+$ ansible dbserver -b -m yum -a "name=* state=latest"
