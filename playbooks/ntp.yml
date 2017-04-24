@@ -1,0 +1,12 @@
+---
+# - - - - - - - - - - - - - - - - - - - - - 
+# Install and enable ntp service on hosts
+# - - - - - - - - - - - - - - - - - - - - -
+#
+- hosts: all
+  become: yes
+  tasks:
+  - yum: name=ntp state=present
+  - service: name=ntpd state=started enabled=yes
+- name: Ensure NTP is running.
+  service: name=ntpd state=started enabled=yes
