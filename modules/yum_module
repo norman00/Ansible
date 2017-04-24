@@ -17,3 +17,4 @@ $ ansible webserver -b -m yum -a "name: http://nginx.org/packages/centos/6/noarc
 
 # Upgrade all packages
 $ ansible dbserver -b -m yum -a "name=* state=latest"
+
