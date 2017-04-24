@@ -1,4 +1,8 @@
-# This is the inventory file, usually placed in /etc/ansible/hosts
+# - - - - - - - - - - - - - - - - - - - - - - - - - 
+# This is a sample inventory file, usually placed in /etc/ansible/hosts
+# Modify this file according to your environment
+# - - - - - - - - - - - - - - - - - - - - - - - - - 
+
 
 [dbserver]
 192.168.56.114
