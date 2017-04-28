@@ -1,0 +1,23 @@
+---
+#
+# This play.yml configures nfs + web1 + web2 + nginx and secures the environment
+# Maintainer: eduardo_rascon@epam.com
+# Version 1.0
+# 1-11-17
+#
+- hosts: nfs 
+  roles:
+    - nfs
+
+- hosts: webservers
+  roles:
+    - webservers
+
+- hosts: loadbalancers
+  roles:
+    - loadbalancers
+
+- hosts: nfs:loadbalancers:webservers 
+  roles:
+    - common
+...

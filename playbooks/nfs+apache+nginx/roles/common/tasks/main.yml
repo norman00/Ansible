@@ -1,0 +1,65 @@
+--- 
+#
+# This playbook secures a newly created machine
+#
+# Testing only user creation - SUCCESS
+# Testing other sshd configs
+#
+# -------------------------------------------------------------
+# Creating security operations user
+- name: create s3c0p5 user
+  user:
+    name: s3c0p5
+    comment: "Access account UID"
+    uid: 43551
+    group: wheel
+    shell: /bin/bash
+    home: /opt/s3c0p5
+- name: adding sshkey
+  authorized_key:
+    user: s3c0p5
+    state: present
+    key: "{{ lookup('file', '/opt/ansible/.ssh/id_rsa.pub') }}"
+    key_options: 'from="192.168.56.101"'
+- name: changing sudoers file
+  lineinfile:
+    dest: /etc/sudoers
+    state: present
+    regexp: '^# %wheel        ALL=(ALL)       NOPASSWD: ALL'
+    line: '%wheel        ALL=(ALL)       NOPASSWD: ALL'
+# -------------------------------------------------------------
+# Taking sshd_config backup before changing port
+- name: taking sshd_config backup  
+  command: /bin/cp /etc/ssh/sshd_config /etc/ssh/sshd_config-BK 
+- name: change ssh port
+  lineinfile:
+    dest: /etc/ssh/sshd_config
+    state: present
+    regexp: '^#Port 22'
+    line: 'Port 22000'
+- name: opening new ssh port
+  command: /bin/firewall-cmd --zone=public --add-port=22000/tcp --permanent
+- name: reloading firewall rules
+  command: /bin/firewall-cmd --reload
+#
+- name: selinux change
+  lineinfile:
+    dest: /etc/selinux/config
+    state: present
+    regexp: 'SELINUX=enforcing'
+    line: 'SELINUX=permissive'
+#         Uncomment below sectin to disable root login
+# ----------------------------------------------------------------
+#- name: restrict root access
+#  lineinfile:
+#    dest: /etc/ssh/sshd_config
+#    state: present
+#    regexp: '^#PermitRootLogin yes'
+#    line: 'PermitRootLogin no'
+# Setenforce 0 to restart sshd service due to systemctl bug https://github.com/systemd/systemd/issues/2716
+- command: /sbin/setenforce 0
+- name: restart sshd daemon
+  service:
+    name: sshd
+    state: restarted
+...

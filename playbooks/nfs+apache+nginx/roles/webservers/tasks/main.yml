@@ -1,0 +1,26 @@
+---
+# This playbook installs httpd, starts the service and mounts /var/www/index.html file from nfs server, and modifies fstab: Result = Fully Functional
+#  - hosts: [webservers]
+#    remote_user: root
+#    gather_facts: no
+#    tasks:
+- name: Install httpd
+  yum:
+    name: httpd
+    state: latest
+- name: Install nfs-utils
+  yum:
+    name: nfs-utils
+    state: latest
+- name: Starts httpd service
+  service:
+    name: httpd
+    state: started
+- name: Add fstab entry
+  lineinfile:
+    dest: /etc/fstab
+    insertafter: EOF
+    line: '192.168.56.108:/var/www/html    /mnt   nfs    rsize=8192,wsize=8192,timeo=14,intr'
+- command: /bin/mount -a
+- command: /bin/systemctl enable httpd.service
+...

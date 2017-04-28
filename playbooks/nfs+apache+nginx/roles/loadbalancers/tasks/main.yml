@@ -1,0 +1,29 @@
+---
+# Installs nginx repo and starts the service, open firewall rule, and copy nginx.conf file, also enables the service
+#- hosts: [loadbalancers]
+#  remote_user: root
+#  gather_facts: no
+#  tasks:
+- name: Nginx | Installing Nginx repo rpm
+  yum:
+    name: http://nginx.org/packages/centos/7/noarch/RPMS/nginx-release-centos-7-0.el7.ngx.noarch.rpm
+- name: Nginx | Installing Nginx
+  yum:
+    name: nginx
+    state: latest
+- name: adding http service to firewall
+  command: /bin/firewall-cmd --permanent --zone=public --add-service=http
+- name: reloading firewall rules
+  command: /bin/firewall-cmd --reload
+- name: Copy nginx.conf file
+  copy:
+    src: /opt/ansible/playbooks/roles/loadbalancers/files/nginx.conf
+    dest: /etc/nginx
+    mode: 0644
+- name: Nginx | Starting Nginx
+  service:
+    name: nginx
+    state: started
+- name: enabling nginx service
+  command: /bin/systemctl enable nginx.service
+...
