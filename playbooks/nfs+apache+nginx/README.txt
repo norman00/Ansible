@@ -2,7 +2,7 @@
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
                EPAM-ACM Export Program
 
-         Maintainer eduardo_rascon@epam.com
+         Maintainer eduardo_rascon@fakedomain.com
                      1-11-2017
 - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
