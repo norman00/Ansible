@@ -1,7 +1,7 @@
 ---
 #
 # This play.yml configures nfs + web1 + web2 + nginx and secures the environment
-# Maintainer: eduardo_rascon@epam.com
+# Maintainer: eduardo_rascon@fakedomain.com
 # Version 1.0
 # 1-11-17
 #
