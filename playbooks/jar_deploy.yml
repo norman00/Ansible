@@ -1,0 +1,8 @@
+---
+ - hosts: appservers
+   remote_user: root
+   tasks:
+        - name: Deploy jar file
+          copy: src=/home/user1/example.jar dest=/opt/tomcat/webapps/example.jar
+        - name: Start jar 
+          command: chdir=/opt/tomcat/webapps/ java -cp example.jar Hello
