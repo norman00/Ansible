@@ -1,0 +1,9 @@
+--- 
+#
+# This playbook secures a newly created machine
+#
+# Testing only user creation - SUCCESS
+# Testing other sshd configs
+#
+# -------------------------------------------------------------
+# Creating security operations user
