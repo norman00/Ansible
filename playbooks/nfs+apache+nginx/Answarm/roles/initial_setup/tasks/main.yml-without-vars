@@ -1,0 +1,18 @@
+---
+- name: change hostname to nirvana
+  hostname:
+    name: nirvana
+
+- name: create group with admin privileges
+  group:
+    name: "{{ admin_group }}"
+    state: present
+
+- name: create functional user
+  user:
+    name: "{{ functional_user }}"
+    comment: Functional_ID
+    group: "{{ admin_group }}"
+    shell: /bin/bash
+    expires: -1
+...
