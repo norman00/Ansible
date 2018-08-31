@@ -7,10 +7,11 @@ desired_ip:
   - 192.168.15.99
 
 # Administrative group
-admin_group:
+admin_groups:
+  - norman
   - wheel
   
 # Functional user
-functional_user:
-  - norman001
+functional_user: norman
 
+# This is a comment
