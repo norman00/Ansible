@@ -120,3 +120,5 @@
 
     - name: Start doods service
       command: ./start_doods.sh
+    
+    # pend to configure crontab to restart doods every 4 hours
