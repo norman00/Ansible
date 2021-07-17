@@ -1,0 +1,122 @@
+---
+- hosts: localhost
+  become: yes
+  connection: local
+  tasks:
+    - name: Update system
+      dnf:
+        name: "*"
+        state: latest
+
+    - name: Set vim as default editor
+      command: dnf install vim-default-editor --allowerasing -y
+
+    - name: Change hostname
+      command: hostnamectl set-hostname technodrome
+
+    - name: Install bat
+      dnf:
+        name: bat
+        state: latest
+
+    - name: Install chrome repo
+      command: dnf install fedora-workstation-repositories -y
+
+    - name: Enable google-chrome repo
+      command: dnf config-manager --set-enabled google-chrome
+
+    - name: Install chrome
+      command: dnf install google-chrome-stable -y
+
+    - name: Install screenfetch
+      dnf:
+        name: screenfetch
+        state: latest
+
+    - name: Download bashrc config
+      command: wget https://raw.githubusercontent.com/norman00/scripts/master/bashrc
+
+    - name: Replace bashrc config file
+      template:
+        src: ./bashrc
+        dest: .bashrc
+        owner: norman001
+        group: norman001
+        mode: 0644
+
+    - name: Remove bashrc template
+      file:
+        path: ./bashrc
+        state: absent
+
+    - name: Install dnf-plugins-core
+      command: dnf install dnf-plugins-core -y
+
+    - name: Add repo
+      command: dnf config-manager \ --add-repo \ https://download.docker.com/linux/fedora/docker-ce.repo
+
+    - name: Install docker engine
+      command: dnf install docker-ce docker-ce-cli containerd.io -y
+
+    - name: Ensure docker group exists
+      group:
+        name: docker
+        state: present
+
+    - name: Add docker group to admin user
+      user:
+        name: norman001
+        groups: docker
+        append: yes
+
+    - name: Start docker service
+      systemd:
+        name: docker
+        state: started
+        daemon_reload: yes
+        enabled: yes
+
+    - name: Create doods log directory
+      file:
+        path: /home/norman001/logs
+        state: directory
+        mode: '0755'
+    
+    - name: Touch log file
+      file:
+        path: /home/norman001/logs/doods.log
+        state: touch
+        mode: '0755'
+
+    - name: Download start doods script
+      command: wget https://raw.githubusercontent.com/norman00/scripts/master/doods/start_doods.sh
+
+    - name: Adjust start_doods permissions
+      file:
+        path: start_doods.sh
+        owner: norman001
+        group: norman001
+        mode: '0744'
+
+    - name: Download stop doods script
+      command: wget https://raw.githubusercontent.com/norman00/scripts/master/doods/stop_doods.sh
+
+    - name: Adjust stop_doods permissions
+      file:
+        path: stop_doods.sh
+        owner: norman001
+        group: norman001
+        mode: '0744'
+
+    - name: Download restart doods script
+      command: wget https://raw.githubusercontent.com/norman00/scripts/master/doods/restart_doods.sh
+
+    - name: Adjust restart_doods permissions
+      file:
+        path: restart_doods.sh
+        owner: norman001
+        group: norman001
+        mode: '0744'
+
+    - name: Start doods service
+      command: ./start_doods.sh
