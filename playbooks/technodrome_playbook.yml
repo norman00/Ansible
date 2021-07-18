@@ -19,6 +19,22 @@
         name: bat
         state: latest
 
+    - name: Install git
+      package:
+        name: git
+        state: latest
+
+    - name: Install cronie
+      package:
+        name: cronie
+        state: latest
+
+    - name: Configure cronie service
+      service:
+        name: crond
+        state: started
+        enabled: yes
+
     - name: Install chrome repo
       command: dnf install fedora-workstation-repositories -y
 
@@ -32,6 +48,12 @@
       dnf:
         name: screenfetch
         state: latest
+
+    - name: Install powerline
+      dnf:
+        name:
+          - powerline
+          - powerline-fonts
 
     - name: Download bashrc config
       command: wget https://raw.githubusercontent.com/norman00/scripts/master/bashrc
@@ -120,5 +142,12 @@
 
     - name: Start doods service
       command: ./start_doods.sh
-    
-    # pend to configure crontab to restart doods every 4 hours
+
+    - name: Cleanup
+      shell: sudo rm *_doods.sh.*
+
+    - name: Configure restart doods job
+      cron:
+        name: "restart doods"
+        hour: "*/2"
+        job: "/home/norman001/restart_doods.sh" 
