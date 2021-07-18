@@ -2,6 +2,7 @@
 - hosts: localhost
   become: yes
   connection: local
+  vars_files: vars
   tasks:
     - name: Update system
       dnf:
@@ -62,8 +63,8 @@
       template:
         src: ./bashrc
         dest: .bashrc
-        owner: norman001
-        group: norman001
+        owner: "{{ username }}"
+        group: "{{ username }}"
         mode: 0644
 
     - name: Remove bashrc template
@@ -87,7 +88,7 @@
 
     - name: Add docker group to admin user
       user:
-        name: norman001
+        name: "{{ username }}"
         groups: docker
         append: yes
 
@@ -100,13 +101,13 @@
 
     - name: Create doods log directory
       file:
-        path: /home/norman001/logs
+        path: "/home/{{ username }}/logs"
         state: directory
         mode: '0755'
     
     - name: Touch log file
       file:
-        path: /home/norman001/logs/doods.log
+        path: "/home/{{ username }}/logs/doods.log"
         state: touch
         mode: '0755'
 
@@ -116,8 +117,8 @@
     - name: Adjust start_doods permissions
       file:
         path: start_doods.sh
-        owner: norman001
-        group: norman001
+        owner: "{{ username }}"
+        group: "{{ username }}"
         mode: '0744'
 
     - name: Download stop doods script
@@ -126,8 +127,8 @@
     - name: Adjust stop_doods permissions
       file:
         path: stop_doods.sh
-        owner: norman001
-        group: norman001
+        owner: "{{ username }}"
+        group: "{{ username }}"
         mode: '0744'
 
     - name: Download restart doods script
@@ -136,8 +137,8 @@
     - name: Adjust restart_doods permissions
       file:
         path: restart_doods.sh
-        owner: norman001
-        group: norman001
+        owner: "{{ username }}"
+        group: "{{ username }}"
         mode: '0744'
 
     - name: Start doods service
@@ -145,9 +146,10 @@
 
     - name: Cleanup
       shell: sudo rm *_doods.sh.*
+      ignore_errors: yes
 
     - name: Configure restart doods job
       cron:
         name: "restart doods"
-        hour: "*/2"
-        job: "/home/norman001/restart_doods.sh" 
+        hour: "*/1"
+        job: "/home/{{ username }}/restart_doods.sh"
