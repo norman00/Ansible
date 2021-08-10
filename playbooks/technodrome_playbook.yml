@@ -75,7 +75,7 @@
     - name: Install dnf-plugins-core
       command: dnf install dnf-plugins-core -y
 
-    - name: Add repo
+    - name: Add docker repo
       command: dnf config-manager \ --add-repo \ https://download.docker.com/linux/fedora/docker-ce.repo
 
     - name: Install docker engine
@@ -152,4 +152,5 @@
       cron:
         name: "restart doods"
         hour: "*/1"
+        user: "{{ username }}"
         job: "/home/{{ username }}/restart_doods.sh"
