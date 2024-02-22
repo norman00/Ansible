@@ -1,0 +1,12 @@
+---
+#
+# Playbook to test Ansible semaphore
+#
+    - hosts: all
+      
+      tasks:
+        - name: Check OS version
+          ansible.builtin.command: uname -a
+          register: myoutput
+        
+        - debug: msg="{{ myoutput.stdout }}"
